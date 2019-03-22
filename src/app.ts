@@ -1,12 +1,13 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as logging from './middlewares/logging';
+import {IController} from 'controllers/IController';
  
 export class App {
-  public app: express.Application;
-  public port: number;
+  private app: express.Application;
+  private port: number;
  
-  constructor(controllers, port) {
+  constructor(controllers : IController[], port : number) {
     this.app = express();
     this.port = port;
  
@@ -21,13 +22,13 @@ export class App {
  
   private initializeControllers(controllers) {
     controllers.forEach((controller) => {
-      this.app.use('/', controller.router);
+      this.app.use('/', controller.getRouter());
     });
   }
  
   public listen() {
     this.app.listen(this.port, () => {
-      console.log(`App listening on the port ${this.port}`);
+      console.log(`Server listening on port ${this.port}`);
     });
   }
 }

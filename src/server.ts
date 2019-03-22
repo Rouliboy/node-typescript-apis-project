@@ -1,5 +1,5 @@
 import {App} from './app';
-import {PostsController} from './controllers/posts/posts.controller';
+import {PostsController} from './controllers/posts/PostController';
  
 const app = new App(
   [
